@@ -5,46 +5,50 @@
 
 {% block header %}
 <link rel="stylesheet" href="{% static "css/talk.css" %}"></link>
-{% endblock %}
+{% endblock header %}
 
 {% block title %}
   チャットボットもどき
-{% endblock %}
+{% endblock title %}
 
 {% block content %}
-<div class="container">
-    <form action="" method="post">{% csrf_token %}
-        <h1>雑談チャットボット</h1>
-        <div class="form-group row my-4">         
-            <label class="col-lg-1 col-form-label"><h4>{{form.texttwo.label}}</h4></label>
-    		<div class="col-lg-6">       
-	            {{form.texttwo|add_class:"form-control"}}
-    		</div>
-    		<div class="col-lg-2">       
-	            <button type="submit" class="btn btn-primary">送信する</button>
-    		</div>
-        </div>
-        <div id="talkarea">
-        {% for talktxt in talktxts %}
-        {% if talktxt.k == 'b' %}
-        	<div class="form-group row my-2">         
-	        	<div class="col-lg-1"><img src="{% static "images/k_boy.png" %}" /></div> 
-     			<div class="p-3 m-1 col-lg-5 text-black font-weight-bold">       
-	           		{{ talktxt.txt }}
-	        	</div> 
-	        	<div class="col-lg-4"></div>  
-        	</div>
-        {% else %}	
-        	<div class="form-group row my-2">
-        		<div class="col-lg-4"></div>
-        		<div class="col-lg-1"><img src="{% static "images/b_girl.png" %}" /></div>  
-        		<div class="p-3 m-1 col-lg-5 bg-success text-white font-weight-bold">
-        			{{ talktxt.txt }}
-        		</div>
-        	</div>
-        {% endif %}	 
-        {% endfor %}
-        </div>
-     </form>
-</div>  
-{% endblock %}
+<h1 class="text-center">AIとチャット</h1>
+<div id="talkarea">
+	{% for talktxt in talktxts %}
+	{% if talktxt.k == 'b' %}
+		<div class="form-group row my-2 clearfix">
+			<div class="col-lg-4"></div>
+				<div class="p-3 m-1 col-lg-5 alert alert-primary font-weight-bold float-left text-right" role="alert">
+					{{ talktxt.txt }}
+				</div>
+			<div class="col-lg-1 float-right"><img src="{% static 'images/user_icon.png' %}" width="50px;" /></div> 
+		</div>
+	{% else %}	
+		<div class="form-group row my-2 clearfix">
+			<div class="col-lg-1 float-left"  style="margin-right:30px;"><img src="{% static 'images/ai_icon.png' %}" width="50px;" /></div>  
+			<div class="p-3 m-1 col-lg-5 alert alert-secondary font-weight-bold float-right" role="alert" style="margin-left:10px;">
+				{{ talktxt.txt }}
+			</div>
+		</div>
+	{% endif %}	 
+	{% endfor %}
+	</div>
+	<form action="" method="post">{% csrf_token %}
+		<div class="form-group row my-4" id="user_input_form">
+				<label class="col-lg-1 col-form-label"><h4>{{form.texttwo.label}}</h4></label>
+			<div class="col-lg-6">       
+						{{form.texttwo|add_class:"form-control"}}
+			</div>
+			<div class="col-lg-2">       
+						<button type="submit" class="btn btn-primary" id="postText">送信する</button>
+			</div>
+		</div>
+	</form>
+	<script>
+		window.onload = function(){
+			var targetEl = document.getElementById('talkarea');
+			targetEl.scrollTop = targetEl.scrollHeight
+		};
+	</script>
+	{% endblock content %}
+

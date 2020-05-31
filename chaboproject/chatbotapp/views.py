@@ -18,8 +18,8 @@ def talk_do(request):
     a = t.get(q)
     # 描画用リストに最新のメッセージを格納する
     talktxts = []
-    talktxts.append(__makedic('ai', a))
-    talktxts.append(__makedic('b', q))
+    talktxts.insert(0, __makedic('ai', a))
+    talktxts.insert(0, __makedic('b', q))
     # 過去の応答履歴をセッションから取り出してリストに追記する
     saveh = []
     if 'hist' in request.session:
@@ -27,10 +27,10 @@ def talk_do(request):
       saveh = hists
       for h in reversed(hists):
         x = h.split(':')
-        talktxts.append(__makedic(x[0], x[1]))
+        talktxts.insert(0, __makedic(x[0], x[1]))
     # 最新のメッセージを履歴に加えてセッションに保存する
-    saveh.append('b:' + q)
-    saveh.append('ai:' + a)
+    saveh.insert(0, 'ai:' + a)
+    saveh.insert(0, 'b:' + q)
     request.session['hist'] = saveh
     # 描画準備
     form = forms.UserForm(label_suffix=":")

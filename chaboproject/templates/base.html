@@ -10,17 +10,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   	{% block header %}
-	{% endblock %}
-    <title>{% block title %}デモ用テンプレート{% endblock %}</title>
+	{% endblock header%}
+    <title>{% block title %}ChaboProject{% endblock title%}</title>
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-primary text-white">
-        <h3 >サンプル (django3.0　＆　bootstrap4)</h3>
+    <nav class="navbar navbar-dark bg-primary text-white mx.auto">
+        <h3 style="margin: 0 auto;">ChaboProject</h3>
     </nav>
-
     <div class="container">
 	    {% block content %}
-	    {% endblock %}
+	    {% endblock content %}
     </div>    
    </body>
 </html>

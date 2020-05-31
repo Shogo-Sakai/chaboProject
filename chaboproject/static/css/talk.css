@@ -1,0 +1,13 @@
+#talkarea
+{
+  width: 50vw;
+  height: 500px;
+  margin: 0 auto;
+  overflow: auto;
+}
+
+#user_input_form{
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}

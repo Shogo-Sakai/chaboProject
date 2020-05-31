@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static "css/talk.css" %}"></link>
+{% endblock %}
+
+{% block title %}
+  チャットボットもどき
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form action="" method="post">{% csrf_token %}
+        <h1>雑談チャットボット</h1>
+        <div class="form-group row my-4">         
+            <label class="col-lg-1 col-form-label"><h4>{{form.texttwo.label}}</h4></label>
+    		<div class="col-lg-6">       
+	            {{form.texttwo|add_class:"form-control"}}
+    		</div>
+    		<div class="col-lg-2">       
+	            <button type="submit" class="btn btn-primary">送信する</button>
+    		</div>
+        </div>
+        <div id="talkarea">
+        {% for talktxt in talktxts %}
+        {% if talktxt.k == 'b' %}
+        	<div class="form-group row my-2">         
+	        	<div class="col-lg-1"><img src="{% static "images/k_boy.png" %}" /></div> 
+     			<div class="p-3 m-1 col-lg-5 text-black font-weight-bold">       
+	           		{{ talktxt.txt }}
+	        	</div> 
+	        	<div class="col-lg-4"></div>  
+        	</div>
+        {% else %}	
+        	<div class="form-group row my-2">
+        		<div class="col-lg-4"></div>
+        		<div class="col-lg-1"><img src="{% static "images/b_girl.png" %}" /></div>  
+        		<div class="p-3 m-1 col-lg-5 bg-success text-white font-weight-bold">
+        			{{ talktxt.txt }}
+        		</div>
+        	</div>
+        {% endif %}	 
+        {% endfor %}
+        </div>
+     </form>
+</div>  
+{% endblock %}

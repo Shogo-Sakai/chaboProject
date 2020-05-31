@@ -2,11 +2,11 @@ from django import forms
 
 class UserForm(forms.Form):
   texttwo = forms.CharField(
-    label="話す",
+    label="ここからAIと会話",
     widget=forms.TextInput(
       attrs={
         'id':'dropedfile',
-        'placeholder': 'ここに会話文を入力します。',
+        'placeholder': '会話文を入力してください。',
       }
     )
   )

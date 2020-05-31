@@ -29,8 +29,8 @@ def talk_do(request):
         x = h.split(':')
         talktxts.insert(0, __makedic(x[0], x[1]))
     # 最新のメッセージを履歴に加えてセッションに保存する
-    saveh.insert(0, 'ai:' + a)
-    saveh.insert(0, 'b:' + q)
+    saveh.append('b:' + q)
+    saveh.append('ai:' + a)
     request.session['hist'] = saveh
     # 描画準備
     form = forms.UserForm(label_suffix=":")
